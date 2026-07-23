@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jancrel Lewin D Abarquez - Portfolio</title>
+    <!-- Google Fonts for futuristic look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #05050a;
+            --bg-card: rgba(13, 13, 25, 0.7);
+            --bg-card-hover: rgba(20, 20, 40, 0.85);
+            --border-glow: rgba(99, 102, 241, 0.2);
+            --border-glow-hover: rgba(99, 102, 241, 0.5);
+            
+            --primary: #6366f1; /* Indigo */
+            --primary-glow: rgba(99, 102, 241, 0.35);
+            --secondary: #14b8a6; /* Teal */
+            --secondary-glow: rgba(20, 184, 166, 0.35);
+            --accent: #f43f5e; /* Rose */
+            
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-dim: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, .font-tech {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Ambient Glow Background */
+        .ambient-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(20, 184, 166, 0.08) 0%, transparent 40%);
+        }
+
+        /* Canvas Particle Background */
+        canvas#particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f1f38;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Navigation Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(5, 5, 10, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.35rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+        }
+
+        .nav-link.active {
+            color: #fff;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(20, 184, 166, 0.2));
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        /* Hero / Home Section */
+        .hero {
+            position: relative;
+            padding: 7rem 2rem 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(20, 184, 166, 0.1));
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: 30px;
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(20, 184, 166, 0.05);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span.gradient {
+            background: linear-gradient(135deg, #fff 30%, var(--text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h1 span.accent-gradient {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        .hero-roles {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .hero-role-pill {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.5rem 1.25rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        .hero-role-pill:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 2.5rem;
+        }
+
+        .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Container & Sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .content-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .content-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: left;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title span {
+            background: linear-gradient(135deg, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            border-radius: 2px;
+        }
+
+        /* Summary Cards / Dashboard layout */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 2.5rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: var(--border-glow-hover);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.1);
+        }
+
+        .summary-text h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.25rem;
+        }
+
+        .summary-text p {
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(99, 102, 241, 0.25);
+            transform: translateX(5px);
+        }
+
+        .info-card strong {
+            color: var(--text-main);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-card span {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* About / Experience Section */
+        .experience-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid rgba(99, 102, 241, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid var(--bg-dark);
+            box-shadow: 0 0 10px var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover::before {
+            background: var(--secondary);
+            box-shadow: 0 0 12px var(--secondary);
+            transform: scale(1.2);
+        }
+
+        .timeline-item:hover {
+            border-left-color: var(--secondary);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-title h3 {
+            font-size: 1.25rem;
+            color: #fff;
+        }
+
+        .timeline-company {
+            color: var(--secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-family: 'Space Grotesk', sans-serif;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .timeline-body p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Skills Grid */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-group-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+
+        .skill-group-card:hover {
+            border-color: var(--border-glow-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(20, 184, 166, 0.08);
+        }
+
+        .skill-group-card h3 {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.75rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-pill {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-pill:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 12px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Projects Section styling */
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover {
+            border-color: var(--border-glow-hover);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.12);
+        }
+
+        .project-header {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s ease;
+        }
+
+        .project-header:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .project-info-main {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .project-info-main h3 {
+            font-size: 1.4rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .project-meta-row {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .project-type-badge {
+            background: rgba(20, 184, 166, 0.1);
+            color: var(--secondary);
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .expand-arrow {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card.expanded .expand-arrow {
+            transform: rotate(180deg);
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .project-drawer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-top: 1px solid transparent;
+        }
+
+        .project-card.expanded .project-drawer {
+            max-height: 1200px;
+            border-top-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .project-body {
+            padding: 2.5rem;
+        }
+
+        .project-description {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .project-features-title {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .feature-item::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        .tech-tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .tech-badge {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+            padding: 0.35rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .action-bar {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .action-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--primary), rgba(99, 102, 241, 0.8));
+            color: #fff;
+            padding: 0.85rem 1.75rem;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+            text-decoration: none;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .action-button .badge-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.15rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Gallery Modal styling */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(5, 5, 10, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 200;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-container {
+            width: 100%;
+            max-width: 950px;
+            background: rgba(13, 13, 25, 0.9);
+            border: 1px solid var(--border-glow-hover);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.25rem;
+            color: #fff;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: var(--accent);
+        }
+
+        .modal-viewport {
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            min-height: 350px;
+            background: rgba(5, 5, 10, 0.5);
+        }
+
+        .modal-image-wrapper {
+            width: 100%;
+            max-height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: #000;
+        }
+
+        .modal-img {
+            max-width: 100%;
+            max-height: 50vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .modal-caption {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .modal-caption h4 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-caption p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .modal-nav {
+            padding: 1.25rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(13, 13, 25, 0.95);
+        }
+
+        .modal-counter {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modal-btn {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #fff;
+            padding: 0.6rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .modal-progress {
+            width: 100%;
+            height: 3px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .modal-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Footer styling */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Media Queries */
+        @media (max-width: 900px) {
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 4rem 1rem 3rem 1rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .glass-card {
+                padding: 1.5rem;
+            }
+
+            .timeline-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .timeline-date {
+                align-self: flex-start;
+                margin-top: 0.25rem;
+            }
+
+            .project-header {
+                padding: 1.5rem;
+            }
+
+            .project-body {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas Particle Network Background -->
+    <canvas id="particles"></canvas>
+    <div class="ambient-glow"></div>
+
+    <!-- Navigation Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span>JABARQUEZ.DEV</span>
+            </a>
+            <ul class="nav-links">
+                <li><a class="nav-link active" onclick="showSection('home', this)">Home</a></li>
+                <li><a class="nav-link" onclick="showSection('about', this)">About</a></li>
+                <li><a class="nav-link" onclick="showSection('projects', this)">Projects</a></li>
+                <li><a class="nav-link" onclick="showSection('skills', this)">Skills</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Home Section (Hero + Summary) -->
+    <div id="home" class="content-section active">
+        <section class="hero">
+            <div class="role-badge">Available for Opportunities</div>
+            <h1>
+                <span class="gradient">Jancrel Lewin D Abarquez</span>
+                <span class="accent-gradient">Full Stack Developer</span>
+            </h1>
+            
+            <div class="hero-roles">
+                <span class="hero-role-pill">Junior Backend Programmer</span>
+                <span class="hero-role-pill">Junior Cybersecurity Analyst</span>
+                <span class="hero-role-pill">IT Specialist</span>
+            </div>
+
+            <div class="hero-meta">
+                <span>📍 Dasmarinas, Cavite, PH</span>
+                <span>💼 4th Year BSIT Student</span>
+                <span>📧 femro.jla@gmail.com</span>
+            </div>
+        </section>
+
+        <section class="container">
+            <h2 class="section-title"><span>Professional Summary</span></h2>
+            <div class="summary-grid" style="margin-top: 2rem;">
+                <div class="glass-card summary-text">
+                    <h3>23 Year Old Full Stack Developer & Analyst</h3>
+                    <p>I am a passionate full-stack developer specializing in building scalable backend systems, optimizing databases, and integrating security audits into system designs. Currently a 4th-year Bachelor of Science in Information Technology student, balancing enterprise internships, systems operations, and security testing.</p>
+                    <p>My expertise includes backend logic in Node.js and PHP/Laravel, modern frontend applications built with React and Angular, and robust databases like PostgreSQL, MySQL, and Supabase. I design with code security, data consistency, and minimalist UX in mind.</p>
+                    <p>With 5 major enterprise-level and capstone applications developed, I excel at handling the complete project life cycle—from system architecture to cloud deployment and ongoing maintenance.</p>
+                </div>
+
+                <div class="info-panel">
+                    <div class="info-card">
+                        <strong>Current Position</strong>
+                        <span>Junior Intern Full Stack Developer</span>
+                    </div>
+                    <div class="info-card">
+                        <strong>Technical Roles</strong>
+                        <span>IT Specialist & Backend Programmer</span>
+                    </div>
+                    <div class="info-card">
+                        <strong>Primary Focus Areas</strong>
+                        <span>Web/Mobile Architectures & Cybersecurity</span>
+                    </div>
+                    <div class="info-card">
+                        <strong>Location</strong>
+                        <span>Salitran 1, Dasmarinas, Cavite</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" class="content-section">
+        <section class="container">
+            <h2 class="section-title"><span>About Me</span></h2>
+            
+            <div class="summary-grid" style="margin-top: 2rem;">
+                <div class="glass-card">
+                    <h3 style="color: var(--secondary); margin-bottom: 1.5rem;">Background & Core Strengths</h3>
+                    <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                        My professional journey merges academic discipline with real-world applications. By working directly on complex multi-branch management systems, point-of-sale inventory networks, and secure communication-centric mobile platforms, I have built a deep practical understanding of software design patterns and client support protocols.
+                    </p>
+                    <div class="features-grid" style="margin-bottom: 0;">
+                        <div class="feature-item" style="color: var(--text-main);">Full-Stack Web & Mobile Architectures</div>
+                        <div class="feature-item" style="color: var(--text-main);">Database Administration & Query Optimization</div>
+                        <div class="feature-item" style="color: var(--text-main);">Security Code Review & Access Vulnerabilities</div>
+                        <div class="feature-item" style="color: var(--text-main);">Network Monitoring & XAMPP Local Servers</div>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <h3 style="color: var(--secondary); margin-bottom: 1.5rem;">Education</h3>
+                    <div class="timeline-item" style="border-left-color: var(--primary); padding-left: 1.5rem;">
+                        <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.25rem;">Bachelor of Science in Information Technology</h4>
+                        <p style="color: var(--secondary); font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">De La Salle University - Dasmariñas</p>
+                        <span class="timeline-date">4th Year (Ongoing)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 4rem;">
+                <h3 style="font-size: 1.5rem; color: #fff; margin-bottom: 2rem;">Experience & Specializations</h3>
+                <div class="experience-timeline">
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">
+                                <h3>Junior Intern Full Stack Developer</h3>
+                                <span class="timeline-company">Enterprise Solutions</span>
+                            </div>
+                            <span class="timeline-date">Current</span>
+                        </div>
+                        <div class="timeline-body">
+                            <p>Developing scalable web and mobile software. Integrating backend services in PHP/Laravel and Node.js with React/Angular frontends. Overseeing database modeling and security implementations.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">
+                                <h3>Junior Backend Programmer</h3>
+                                <span class="timeline-company">Systems Architecture & API Design</span>
+                            </div>
+                            <span class="timeline-date">Current</span>
+                        </div>
+                        <div class="timeline-body">
+                            <p>Designing optimized relational databases using PostgreSQL and MySQL. Managing real-time APIs, server-side data workflows with Node.js/Supabase, and handling complex business computations securely.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">
+                                <h3>Junior Cybersecurity Analyst</h3>
+                                <span class="timeline-company">Security Operations & Vulnerability Audits</span>
+                            </div>
+                            <span class="timeline-date">Current</span>
+                        </div>
+                        <div class="timeline-body">
+                            <p>Auditing codebases for common vulnerability vectors (SQL injections, XSS, broken access controls). Building secure middleware validation schemas and defining strict event-based audit logging.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">
+                            <div class="timeline-title">
+                                <h3>IT Specialist (Formerly IT Maintenance & Support)</h3>
+                                <span class="timeline-company">Network Administration & Technical Support</span>
+                            </div>
+                            <span class="timeline-date">2023 - Present</span>
+                        </div>
+                        <div class="timeline-body">
+                            <p>Setting up local environments, system troubleshooting, hardware Diagnostics, managing clients' local XAMPP servers, configuring secure network links, and provisioning automated backups.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Projects Section -->
+    <div id="projects" class="content-section">
+        <section class="container">
+            <h2 class="section-title"><span>Featured Projects</span></h2>
+            
+            <div class="projects-list" style="margin-top: 2rem;">
+                
+                <!-- Project 1: Flexzone -->
+                <div class="project-card">
+                    <div class="project-header" onclick="toggleProjectCard(this)">
+                        <div class="project-info-main">
+                            <h3>Flexzone Gym Management System</h3>
+                            <div class="project-meta-row">
+                                <span class="project-type-badge">Web System</span>
+                                <span style="font-size: 0.85rem; color: var(--text-dim);">PHP / MySQL / Firebase</span>
+                            </div>
+                        </div>
+                        <div class="expand-arrow">▼</div>
+                    </div>
+                    <div class="project-drawer">
+                        <div class="project-body">
+                            <p class="project-description">
+                                A comprehensive, multi-branch gym management platform designed for professional fitness facilities. Features member enrollment, real-time attendance tracking via QR codes, automated billing, and personal coaching management. Built with responsive design principles to serve both administrators and members seamlessly.
+                            </p>
+                            <h4 class="project-features-title">Core Implementation Details</h4>
+                            <div class="features-grid">
+                                <div class="feature-item">Multi-Branch Operations (Burol & Don Campos)</div>
+                                <div class="feature-item">Realtime QR Code Member Check-in/Check-out</div>
+                                <div class="feature-item">Personal Coaching Booking & Management</div>
+                                <div class="feature-item">Excel Migration module for older systems</div>
+                                <div class="feature-item">Automated revenue tracking & billing logs</div>
+                                <div class="feature-item">Admin Dashboard with interactive graphs</div>
+                            </div>
+                            <div class="tech-tags-list">
+                                <span class="tech-badge">PHP</span>
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">CSS3</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">Firebase</span>
+                                <span class="tech-badge">XAMPP</span>
+                                <span class="tech-badge">MySQL</span>
+                            </div>
+                            <div class="action-bar">
+                                <button class="action-button" onclick="openGallery('flexzone')">
+                                    <span>📱 View Screenshots</span>
+                                    <span class="badge-count">27 screens</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: AIA Gym -->
+                <div class="project-card">
+                    <div class="project-header" onclick="toggleProjectCard(this)">
+                        <div class="project-info-main">
+                            <h3>AIA Gym Management System</h3>
+                            <div class="project-meta-row">
+                                <span class="project-type-badge">Capstone Project</span>
+                                <span style="font-size: 0.85rem; color: var(--text-dim);">React JS / PHP / Firebase</span>
+                            </div>
+                        </div>
+                        <div class="expand-arrow">▼</div>
+                    </div>
+                    <div class="project-drawer">
+                        <div class="project-body">
+                            <p class="project-description">
+                                An enterprise-level gym management solution developed as a capstone project. Includes comprehensive owner/admin dashboard with real-time monitoring, staff management, advanced payment tracking, and deep business analytics. Designed for professional gym operators with complex operational requirements.
+                            </p>
+                            <h4 class="project-features-title">Core Implementation Details</h4>
+                            <div class="features-grid">
+                                <div class="feature-item">Owner Dashboard with revenue charts & statistics</div>
+                                <div class="feature-item">Class Schedule Editor for admin management</div>
+                                <div class="feature-item">System Event Logs for security audits</div>
+                                <div class="feature-item">Member renewal process with custom payment schemes</div>
+                                <div class="feature-item">Front desk sub-dashboard with check-in alerts</div>
+                                <div class="feature-item">Responsive client profile pages with history</div>
+                            </div>
+                            <div class="tech-tags-list">
+                                <span class="tech-badge">React JS</span>
+                                <span class="tech-badge">PHP</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">Firebase</span>
+                                <span class="tech-badge">Charts.js</span>
+                                <span class="tech-badge">CSS3</span>
+                            </div>
+                            <div class="action-bar">
+                                <button class="action-button" onclick="openGallery('aia')">
+                                    <span>📱 View Screenshots</span>
+                                    <span class="badge-count">23 screens</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: TPIS Inventory System -->
+                <div class="project-card">
+                    <div class="project-header" onclick="toggleProjectCard(this)">
+                        <div class="project-info-main">
+                            <h3>TPIS Inventory System</h3>
+                            <div class="project-meta-row">
+                                <span class="project-type-badge">Inventory & POS</span>
+                                <span style="font-size: 0.85rem; color: var(--text-dim);">PHP / MySQL / Admin Dashboards</span>
+                            </div>
+                        </div>
+                        <div class="expand-arrow">▼</div>
+                    </div>
+                    <div class="project-drawer">
+                        <div class="project-body">
+                            <p class="project-description">
+                                A high-performance warehouse inventory and retail POS system. Handles complete warehouse item logs, supplier directory tracking, transaction histories, and cashier-level checkout interfaces with dynamic calculations.
+                            </p>
+                            <h4 class="project-features-title">Core Implementation Details</h4>
+                            <div class="features-grid">
+                                <div class="feature-item">Real-time POS checkout calculator</div>
+                                <div class="feature-item">Warehouse stock level notifications & reporting</div>
+                                <div class="feature-item">Supplier item mappings & management</div>
+                                <div class="feature-item">Detailed cashier transaction histories</div>
+                                <div class="feature-item">Analytical dashboards for administrative tracking</div>
+                                <div class="feature-item">Secure multi-role authentication flow</div>
+                            </div>
+                            <div class="tech-tags-list">
+                                <span class="tech-badge">PHP</span>
+                                <span class="tech-badge">MySQL</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">CSS3</span>
+                                <span class="tech-badge">XAMPP</span>
+                            </div>
+                            <div class="action-bar">
+                                <button class="action-button" onclick="openGallery('tpis')">
+                                    <span>📱 View Screenshots</span>
+                                    <span class="badge-count">12 screens</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: InternTracker Mobile App -->
+                <div class="project-card">
+                    <div class="project-header" onclick="toggleProjectCard(this)">
+                        <div class="project-info-main">
+                            <h3>InternTracker Mobile App</h3>
+                            <div class="project-meta-row">
+                                <span class="project-type-badge">Mobile Application</span>
+                                <span style="font-size: 0.85rem; color: var(--text-dim);">Flutter / Dart / Node.js / Supabase</span>
+                            </div>
+                        </div>
+                        <div class="expand-arrow">▼</div>
+                    </div>
+                    <div class="project-drawer">
+                        <div class="project-body">
+                            <p class="project-description">
+                                A cross-platform mobile application designed to bridge interns, academic coordinators, and industry supervisors. Facilitates digital attendance logging, daily tasks verification, real-time secure chat communication, and performance evaluation metrics.
+                            </p>
+                            <h4 class="project-features-title">Core Implementation Details</h4>
+                            <div class="features-grid">
+                                <div class="feature-item">Cross-platform UI (iOS & Android) with Flutter</div>
+                                <div class="feature-item">Realtime messaging between supervisor & intern</div>
+                                <div class="feature-item">Daily attendance logs with coordinator controls</div>
+                                <div class="feature-item">Academic evaluation & grading metrics dashboards</div>
+                                <div class="feature-item">Task assignments & progress checkboxes</div>
+                                <div class="feature-item">Supabase backend integrations for auth & DB logs</div>
+                            </div>
+                            <div class="tech-tags-list">
+                                <span class="tech-badge">Flutter</span>
+                                <span class="tech-badge">Dart</span>
+                                <span class="tech-badge">Node.js</span>
+                                <span class="tech-badge">Supabase</span>
+                                <span class="tech-badge">PostgreSQL</span>
+                                <span class="tech-badge">REST API</span>
+                            </div>
+                            <div class="action-bar">
+                                <button class="action-button" onclick="openGallery('intern')">
+                                    <span>📱 View Screenshots</span>
+                                    <span class="badge-count">16 screens</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: MVFRWRD E-Commerce -->
+                <div class="project-card">
+                    <div class="project-header" onclick="toggleProjectCard(this)">
+                        <div class="project-info-main">
+                            <h3>MVFRWRD E-Commerce System</h3>
+                            <div class="project-meta-row">
+                                <span class="project-type-badge">E-Commerce Web</span>
+                                <span style="font-size: 0.85rem; color: var(--text-dim);">React JS / Node.js / MySQL</span>
+                            </div>
+                        </div>
+                        <div class="expand-arrow">▼</div>
+                    </div>
+                    <div class="project-drawer">
+                        <div class="project-body">
+                            <p class="project-description">
+                                A sleek clothing store and e-commerce portal featuring product catalog displays, product sorting, cart additions, dynamic tax & shipping computations, and a robust administrative panel for product uploads and shipping settings.
+                            </p>
+                            <h4 class="project-features-title">Core Implementation Details</h4>
+                            <div class="features-grid">
+                                <div class="feature-item">Dynamic shopping cart & bag preview logic</div>
+                                <div class="feature-item">Admin inventory console for product uploads</div>
+                                <div class="feature-item">Tax, shipping, and total payment calculators</div>
+                                <div class="feature-item">Order fulfillment statuses (processing, shipped)</div>
+                                <div class="feature-item">User accounts and shipping profiles security</div>
+                                <div class="feature-item">Modern product filters and catalog pagination</div>
+                            </div>
+                            <div class="tech-tags-list">
+                                <span class="tech-badge">React JS</span>
+                                <span class="tech-badge">Node.js</span>
+                                <span class="tech-badge">MySQL</span>
+                                <span class="tech-badge">CSS3</span>
+                                <span class="tech-badge">Supabase</span>
+                                <span class="tech-badge">Tailwind</span>
+                            </div>
+                            <div class="action-bar">
+                                <button class="action-button" onclick="openGallery('mvfrwrd')">
+                                    <span>📱 View Screenshots</span>
+                                    <span class="badge-count">12 screens</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- Skills Section -->
+    <div id="skills" class="content-section">
+        <section class="container">
+            <h2 class="section-title"><span>Technical Skills</span></h2>
+            
+            <div class="skills-container" style="margin-top: 2rem;">
+                
+                <!-- Group 1: Languages -->
+                <div class="skill-group-card">
+                    <h3><span>Languages</span></h3>
+                    <div class="skills-list">
+                        <span class="skill-pill">PHP</span>
+                        <span class="skill-pill">JavaScript</span>
+                        <span class="skill-pill">Dart</span>
+                        <span class="skill-pill">Java</span>
+                        <span class="skill-pill">Python</span>
+                        <span class="skill-pill">HTML5</span>
+                        <span class="skill-pill">CSS3</span>
+                    </div>
+                </div>
+
+                <!-- Group 2: Frameworks & Libraries -->
+                <div class="skill-group-card">
+                    <h3><span>Frameworks & Libraries</span></h3>
+                    <div class="skills-list">
+                        <span class="skill-pill">Laravel</span>
+                        <span class="skill-pill">React JS</span>
+                        <span class="skill-pill">Angular</span>
+                        <span class="skill-pill">Flutter</span>
+                    </div>
+                </div>
+
+                <!-- Group 3: Databases & Backend -->
+                <div class="skill-group-card">
+                    <h3><span>Databases & Backend</span></h3>
+                    <div class="skills-list">
+                        <span class="skill-pill">PostgreSQL</span>
+                        <span class="skill-pill">MySQL</span>
+                        <span class="skill-pill">Supabase</span>
+                        <span class="skill-pill">Node.js</span>
+                        <span class="skill-pill">Firebase</span>
+                    </div>
+                </div>
+
+                <!-- Group 4: Hosting, Cloud & Tools -->
+                <div class="skill-group-card">
+                    <h3><span>Hosting, Cloud & Tools</span></h3>
+                    <div class="skills-list">
+                        <span class="skill-pill">Vercel</span>
+                        <span class="skill-pill">Hostinger</span>
+                        <span class="skill-pill">Git / GitHub</span>
+                        <span class="skill-pill">XAMPP</span>
+                        <span class="skill-pill">Charts.js</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div id="galleryModal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="modalTitle">Project Screenshots</h3>
+                <button class="modal-close" onclick="closeGallery()">✕</button>
+            </div>
+            <div class="modal-viewport">
+                <div class="modal-image-wrapper">
+                    <img id="modalImg" class="modal-img" src="" alt="Screenshot">
+                </div>
+                <div class="modal-caption">
+                    <h4 id="screenTitle">Title</h4>
+                    <p id="screenDesc">Description</p>
+                </div>
+            </div>
+            <div class="modal-progress">
+                <div id="modalProgressBar" class="modal-progress-bar"></div>
+            </div>
+            <div class="modal-nav">
+                <span class="modal-counter">
+                    Screen <span id="currentIdx">1</span> of <span id="totalIdx">10</span>
+                </span>
+                <div class="modal-buttons">
+                    <button class="modal-btn" onclick="prevScreen()">← Prev</button>
+                    <button class="modal-btn" onclick="nextScreen()">Next →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Jancrel Lewin D Abarquez. Full Stack Developer | IT Specialist</p>
+        <p>Built with minimal & futuristic custom CSS/JS. Dasmarinas, Cavite, PH</p>
+    </footer>
+
+    <!-- Interactive Canvas & Core Logic Script -->
+    <script>
+        // --- SCREENSHOT DATABASES ---
+        const galleries = {
+            flexzone: [
+                { title: 'Homepage', description: 'Landing page with hero section and chatbot integration', image: 'flexzone web system pictures/homepage.png' },
+                { title: 'Add Branches Admin Panel', description: 'Admin view of gym branch locations and details', image: 'flexzone web system pictures/add branches admin panel.png' },
+                { title: 'Admin Staff Login', description: 'Secure authentication for admin and staff access', image: 'flexzone web system pictures/admin and staff login .png' },
+                { title: 'Admin Dashboard', description: 'Real-time analytics with revenue trends and attendance', image: 'flexzone web system pictures/admin dashboard.png' },
+                { title: 'Admin Settings', description: 'Configure gym name, timezone, and preferences', image: 'flexzone web system pictures/admin settings.png' },
+                { title: 'Analytics Admin Panel', description: 'Member activity, retention rates, and visit patterns', image: 'flexzone web system pictures/analytics admin panel .png' },
+                { title: 'Appointment Admin Panel', description: 'View and manage coaching appointments', image: 'flexzone web system pictures/appointment admin panel.png' },
+                { title: 'Appointment Staff Panel', description: 'Staff view of appointment bookings', image: 'flexzone web system pictures/appointment staff panel.png' },
+                { title: 'Book Appointment', description: 'Public form for scheduling coaching sessions', image: 'flexzone web system pictures/appointment.png' },
+                { title: 'Archive Admin Panel', description: 'Archived members management system', image: 'flexzone web system pictures/archive admin panel.png' },
+                { title: 'Archive Staff Panel', description: 'Staff access to archived member records', image: 'flexzone web system pictures/archive staff panel .png' },
+                { title: 'Attendance Staff Panel', description: 'Real-time check-in/out with QR scanner support', image: 'flexzone web system pictures/attendance staff panel.png' },
+                { title: 'Coaching Services', description: 'Personal training packages with pricing options', image: 'flexzone web system pictures/coaching.png' },
+                { title: 'Contact Admin Panel', description: 'Customer contact inquiries and support requests', image: 'flexzone web system pictures/contact admin panel .png' },
+                { title: 'Contacts Staff Panel', description: 'Staff view of contact form submissions', image: 'flexzone web system pictures/contacts staff panel.png' },
+                { title: 'Contact Page', description: 'Branch locations, hours, and contact form', image: 'flexzone web system pictures/contacts.png' },
+                { title: 'Equipment Page', description: 'Cardio equipment showcase and gym amenities', image: 'flexzone web system pictures/equipments.png' },
+                { title: 'FAQ Page', description: 'Frequently asked questions about the gym', image: 'flexzone web system pictures/fAQ.png' },
+                { title: 'Member Staff Panel', description: 'Staff portal for member management', image: 'flexzone web system pictures/member staff panel.png' },
+                { title: 'Members List', description: 'Complete member database with subscriptions', image: 'flexzone web system pictures/members.png' },
+                { title: 'Membership Registration', description: 'Multi-step membership registration with branch selection', image: 'flexzone web system pictures/membership.png' },
+                { title: 'Realtime Customer Card QR', description: 'QR code verification with membership details popup', image: 'flexzone web system pictures/realtime customer card attendance profile.png' },
+                { title: 'Realtime Data Excel Migration', description: 'Import member data from old system with column mapping', image: 'flexzone web system pictures/realtime data excel migration panel.png' },
+                { title: 'Realtime QR Scanner', description: 'Complete attendance log with QR scanner', image: 'flexzone web system pictures/Realtime scanner qr attendance .png' },
+                { title: 'Reports Admin Panel', description: 'Generate attendance and revenue reports', image: 'flexzone web system pictures/reports admin panel.png' },
+                { title: 'Staff Admin Panel', description: 'Admin and staff user account management', image: 'flexzone web system pictures/staff admin panel.png' },
+                { title: 'Staff Dashboard', description: 'Staff-specific dashboard with weekly attendance graph', image: 'flexzone web system pictures/staff dashboard .png' }
+            ],
+            aia: [
+                { title: 'Owner Dashboard', description: 'Main dashboard with real-time statistics and revenue graphs', image: 'AIA gym management/Admin Dashboard .png' },
+                { title: 'Member Management', description: 'Complete member database with approval system', image: 'AIA gym management/member reports.png' },
+                { title: 'Class Schedule Editor', description: 'Advanced class schedule management interface', image: 'AIA gym management/schedule.png' },
+                { title: 'Payment Management', description: 'Payment tracking and history dashboard', image: 'AIA gym management/payament history.png' },
+                { title: 'Attendance Marking', description: 'IN/OUT gym attendance tracking system', image: 'AIA gym management/Gym attendance management.png' },
+                { title: 'Staff Directory', description: 'Staff management and directory system', image: 'AIA gym management/Staff Directory Admin.png' },
+                { title: 'Revenue Charts', description: 'Revenue trends with graphs and analytics', image: 'AIA gym management/report Admin.png' },
+                { title: 'Website CMS', description: 'Content management system panel', image: 'AIA gym management/homepage.png' },
+                { title: 'Member Renewal', description: 'Membership renewal processing interface', image: 'AIA gym management/renew management.png' },
+                { title: 'Security Logs', description: 'System event logging and security monitoring', image: 'AIA gym management/Frontdesk Monitor Admin.png' },
+                { title: 'Membership Plans', description: 'Pricing and membership plan display', image: 'AIA gym management/price.png' },
+                { title: 'Payment Methods', description: 'Multiple payment options interface', image: 'AIA gym management/paid clients.png' },
+                { title: 'Access Control', description: 'Professional member access management', image: 'AIA gym management/login.png' },
+                { title: 'Front Desk Dashboard', description: 'Front desk management dashboard with member overview', image: 'AIA gym management/FRONTDESK.png' },
+                { title: 'Add Member', description: 'Add new member form interface', image: 'AIA gym management/Add new member.png' },
+                { title: 'Client Profile', description: 'Individual member profile view', image: 'AIA gym management/profile.png' },
+                { title: 'Paid Clients', description: 'List of clients with payment records', image: 'AIA gym management/paid clients.png' },
+                { title: 'About Page', description: 'About us page for the gym', image: 'AIA gym management/About.png' },
+                { title: 'Feedback Page', description: 'Client feedbacks and ratings logging panel', image: 'AIA gym management/Feedback.png' },
+                { title: 'Feedback Admin Panel', description: 'Administrative control of customer reviews', image: 'AIA gym management/Feedback Admin.png' },
+                { title: 'Contacts Page', description: 'Contact details with map and direct chat integration', image: 'AIA gym management/contacts.png' },
+                { title: 'Customer Chat Support', description: 'Secure user messaging support popup', image: 'AIA gym management/Join and chat support modal.png' }
+            ],
+            tpis: [
+                { title: 'Admin Dashboard', description: 'General analytics with total inventory values and cashier counts', image: 'TPIS Inventory system/Admin Dashboard.png' },
+                { title: 'Add New Item', description: 'Inventory creation layout with automatic unit tags', image: 'TPIS Inventory system/Add new item.png' },
+                { title: 'Add New Supplier', description: 'Database log to tie supplied items directly to their logistics partners', image: 'TPIS Inventory system/Add new supplier.png' },
+                { title: 'Admin Analytics', description: 'Sales trends, item distributions, and top performers', image: 'TPIS Inventory system/Admin Analytics .png' },
+                { title: 'Admin POS Terminal', description: 'Checkout portal with search filters and dynamic calculations', image: 'TPIS Inventory system/Admin POS.png' },
+                { title: 'Admin Reports Logs', description: 'Filtered sales report sheets and export options', image: 'TPIS Inventory system/Admin Reports.png' },
+                { title: 'Suppliers Overview', description: 'Listing active manufacturers, supply values, and contact nodes', image: 'TPIS Inventory system/Admin Suppliers .png' },
+                { title: 'Transaction Registers', description: 'Log detailing historical sales receipts and clerk info', image: 'TPIS Inventory system/Admin Transaction .png' },
+                { title: 'Warehouse Management Dashboard', description: 'Control screen showing current storage statuses and low-stock indicators', image: 'TPIS Inventory system/Admin Warehouse Dashboard .png' },
+                { title: 'Cashier POS Interface', description: 'Minimalist cashier terminal designed for fast touch operations', image: 'TPIS Inventory system/Cashier POS AND Transcation .png' },
+                { title: 'Login Security Panel', description: 'Secure access controls for Cashiers, Warehouse staff, and Admins', image: 'TPIS Inventory system/Login page.png' },
+                { title: 'Staff Warehouse Control', description: 'Limited-access terminal for warehouse clerks to record stocks', image: 'TPIS Inventory system/Staff warehouse and supplier .png' }
+            ],
+            intern: [
+                { title: 'Coordinator Dashboard', description: 'STI coordinator intern dashboard overview', image: 'Interntracker mobile app/Sti coor dashboard.png' },
+                { title: 'Intern Attendance Tracker', description: 'STI coordinator daily monitoring sheets', image: 'Interntracker mobile app/Sti coor attendance monitoring.png' },
+                { title: 'Intern Evaluations', description: 'STI coordinator evaluation logs', image: 'Interntracker mobile app/sti coor eval .png' },
+                { title: 'Intern Coordinator Messages', description: 'Direct communications panel', image: 'Interntracker mobile app/Sti coor message.png' },
+                { title: 'Verdict Dashboard', description: 'Approval and final grades management dashboard', image: 'Interntracker mobile app/Sti coor verdict .png' },
+                { title: 'Supervisor Dashboard', description: 'Supervisor dashboard overview console', image: 'Interntracker mobile app/supervisor dashbaord.png' },
+                { title: 'Intern Evaluations By Supervisor', description: 'Supervisor metrics evaluation dashboard', image: 'Interntracker mobile app/supervisor eval dashbaord.png' },
+                { title: 'Performance Metrics', description: 'Performance and task metrics analyzer', image: 'Interntracker mobile app/supervisor performance dashboard.png' },
+                { title: 'Assigned Interns Log', description: 'Active interns assignment console', image: 'Interntracker mobile app/supervisor assigned dashboard.png' },
+                { title: 'Intern Dashboard', description: 'Student intern home page dashboard panel', image: 'Interntracker mobile app/Intern Dashbaord.png' },
+                { title: 'Intern Attendance log', description: 'Daily login attendance dashboard', image: 'Interntracker mobile app/Intern Attendance.png' },
+                { title: 'Intern Task Checklist', description: 'Personal checklists, milestones, and task checklists', image: 'Interntracker mobile app/Intern task .png' },
+                { title: 'Intern Inbox Support', description: 'Secured student messaging inbox panel', image: 'Interntracker mobile app/Intern Message .png' },
+                { title: 'Evaluation Checklist Overview', description: 'Evaluation checklists and final grade reviews', image: 'Interntracker mobile app/Intern Eval dashboard .png' },
+                { title: 'Sign In Screen', description: 'InternTracker signup screen', image: 'Interntracker mobile app/signup.png' },
+                { title: 'Auth Panel', description: 'Secure intern portal login interface', image: 'Interntracker mobile app/Sign in .png' }
+            ],
+            mvfrwrd: [
+                { title: 'Homepage Storefront', description: 'Landing layout showcasing brand collections, banners, and filters', image: 'mvfrwrd pictures/homepage.png' },
+                { title: 'Catalog View', description: 'Interactive grid displaying clothing lineups with hover summaries', image: 'mvfrwrd pictures/catalog.png' },
+                { title: 'About Us Layout', description: 'Modern brand statement and mission board with parallax scroll elements', image: 'mvfrwrd pictures/About us.png' },
+                { title: 'Admin Controls', description: 'Administrative configuration panel and system metrics', image: 'mvfrwrd pictures/Admin Dashboard.png' },
+                { title: 'Product Addition Panel', description: 'Quick product metadata form for listing sizes and prices', image: 'mvfrwrd pictures/Add product.png' },
+                { title: 'Configuration Settings', description: 'System toggle board for currencies and location dependencies', image: 'mvfrwrd pictures/Config settings.png' },
+                { title: 'Contact Terminal', description: 'Support mailbox with integrated contact logs', image: 'mvfrwrd pictures/Contact .png' },
+                { title: 'Homepage Content Manager', description: 'Internal CMS to swap homepage banners and seasonal sales details', image: 'mvfrwrd pictures/Homepage management.png' },
+                { title: 'Product Details Card', description: 'Detailed view showing size selections, materials, and stock indexes', image: 'mvfrwrd pictures/Item Card .png' },
+                { title: 'User Admin Manager', description: 'Staff account lists and access control matrix', image: 'mvfrwrd pictures/Manage User.png' },
+                { title: 'Order Fulfillment Console', description: 'Status dashboard to log shipments, print shipping tags, and compute taxes', image: 'mvfrwrd pictures/Manage order.png' },
+                { title: 'Cart Checkout Drawer', description: 'Sleek slide-out cart overview displaying sub-totals and check-out routes', image: 'mvfrwrd pictures/Shopping cart.png' }
+            ]
+        };
+
+        let activeGallery = null;
+        let activeIdx = 0;
+
+        // --- SECTION SWITCHING ---
+        function showSection(secId, navBtn) {
+            document.querySelectorAll('.content-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            const targetSection = document.getElementById(secId);
+            targetSection.classList.add('active');
+            
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            if(navBtn) {
+                navBtn.classList.add('active');
+            }
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // --- COLLAPSIBLE CARDS ---
+        function toggleProjectCard(headerElement) {
+            const card = headerElement.parentElement;
+            const drawer = card.querySelector('.project-drawer');
+            
+            if (card.classList.contains('expanded')) {
+                drawer.style.maxHeight = null;
+                card.classList.remove('expanded');
+            } else {
+                // Collapse other cards first if desired
+                document.querySelectorAll('.project-card').forEach(other => {
+                    other.classList.remove('expanded');
+                    other.querySelector('.project-drawer').style.maxHeight = null;
+                });
+                
+                card.classList.add('expanded');
+                drawer.style.maxHeight = drawer.scrollHeight + 'px';
+            }
+        }
+
+        // --- GALLERY MODAL LOGIC ---
+        function openGallery(projKey) {
+            activeGallery = projKey;
+            activeIdx = 0;
+            updateGalleryModal();
+            document.getElementById('galleryModal').classList.add('active');
+        }
+
+        function closeGallery() {
+            document.getElementById('galleryModal').classList.remove('active');
+        }
+
+        function updateGalleryModal() {
+            const list = galleries[activeGallery];
+            const item = list[activeIdx];
+            
+            document.getElementById('modalTitle').textContent = 
+                activeGallery === 'flexzone' ? 'Flexzone Gym System' :
+                activeGallery === 'aia' ? 'AIA Gym System' :
+                activeGallery === 'tpis' ? 'TPIS Inventory System' :
+                activeGallery === 'intern' ? 'InternTracker Mobile' : 'MVFRWRD E-Commerce';
+                
+            document.getElementById('screenTitle').textContent = item.title;
+            document.getElementById('screenDesc').textContent = item.description;
+            
+            const img = document.getElementById('modalImg');
+            
+            // Encode spaces to prevent breaks
+            const formattedSrc = item.image.replace(/\s/g, '%20');
+            img.src = formattedSrc;
+            
+            document.getElementById('currentIdx').textContent = activeIdx + 1;
+            document.getElementById('totalIdx').textContent = list.length;
+            
+            const progressPct = ((activeIdx + 1) / list.length) * 100;
+            document.getElementById('modalProgressBar').style.width = progressPct + '%';
+        }
+
+        // Preload helper to smooth navigation
+        function preloadImage(url) {
+            const tempImg = new Image();
+            tempImg.src = url.replace(/\s/g, '%20');
+        }
+
+        function nextScreen() {
+            const list = galleries[activeGallery];
+            activeIdx = (activeIdx + 1) % list.length;
+            updateGalleryModal();
+            // Preload the next one
+            const nextIdx = (activeIdx + 1) % list.length;
+            preloadImage(list[nextIdx].image);
+        }
+
+        function prevScreen() {
+            const list = galleries[activeGallery];
+            activeIdx = (activeIdx - 1 + list.length) % list.length;
+            updateGalleryModal();
+        }
+
+        // Close on outside click
+        document.getElementById('galleryModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeGallery();
+            }
+        });
+
+        // Key shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (document.getElementById('galleryModal').classList.contains('active')) {
+                if (e.key === 'ArrowRight') nextScreen();
+                if (e.key === 'ArrowLeft') prevScreen();
+                if (e.key === 'Escape') closeGallery();
+            }
+        });
+
+
+        // --- DYNAMIC PARTICLES BACKGROUND ---
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+
+        let particlesArray = [];
+        const colors = ['rgba(99, 102, 241, 0.15)', 'rgba(20, 184, 166, 0.15)', 'rgba(244, 63, 94, 0.08)'];
+
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', function() {
+            setCanvasSize();
+            initParticles();
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+                if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            const count = Math.min(Math.floor(window.innerWidth * 0.05), 80);
+            for (let i = 0; i < count; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw a subtle dark-grid overlay
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.005)';
+            ctx.lineWidth = 1;
+            const step = 40;
+            for (let x = 0; x < canvas.width; x += step) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+            for (let y = 0; y < canvas.height; y += step) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+
+            particlesArray.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            // Connect nearby particles with lines
+            for (let i = 0; i < particlesArray.length; i++) {
+                for (let j = i + 1; j < particlesArray.length; j++) {
+                    const dx = particlesArray[i].x - particlesArray[j].x;
+                    const dy = particlesArray[i].y - particlesArray[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.05 * (1 - dist/120)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        // Initialize background
+        setCanvasSize();
+        initParticles();
+        animateParticles();
+    </script>
+</body>
+</html>
